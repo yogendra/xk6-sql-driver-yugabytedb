@@ -1,6 +1,7 @@
-const db = sql.open(driver, connection);
 
-db.exec("CREATE TABLE IF NOT EXISTS test_table (id integer PRIMARY KEY AUTOINCREMENT, name VARCHAR NOT NULL, value VARCHAR);");
+const db = sql.open(driver, connection);
+db.exec("DROP TABLE IF EXISTS test_table;");
+db.exec("CREATE TABLE IF NOT EXISTS test_table (id serial, name VARCHAR NOT NULL, value VARCHAR, primary key (id HASH)) SPLIT INTO 1 TABLETS;");
 
 for (let i = 0; i < 5; i++) {
   db.exec("INSERT INTO test_table (name, value) VALUES ('name-" + i + "', 'value-" + i + "');");

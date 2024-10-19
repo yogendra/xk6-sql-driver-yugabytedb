@@ -6,9 +6,15 @@ test: *.go testdata/*.js
 build: k6
 
 k6: *.go go.mod go.sum
-	xk6 build --with github.com/grafana/xk6-sql@latest --with github.com/grafana/xk6-sql-driver-ramsql=.
+	xk6 build --with github.com/grafana/xk6-sql@latest --with  $(shell go list -m)=.
+
+clean:
+	rm -f ./k6
 
 example: k6
 	./k6 run examples/example.js
 
-.PHONY: test all example
+format:
+	go fmt ./...
+
+.PHONY: test clean format all example
