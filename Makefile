@@ -21,12 +21,12 @@ ci_version := $(shell git tag --points-at HEAD)
 ci_user := $(shell id -u)
 ci_group := $(shell id -g)
 build-ci:
-	docker run --rm -t -u ${ci_user}:${ci_group} -v "${PWD}:/xk6" --platform linux/amd64 -e  GOOS=darwin -e GOARCH=amd64 grafana/xk6 build latest --output k6-darwin-amd64-${ci_version} --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=/xk6
-	docker run --rm -t -u ${ci_user}:${ci_group} -v "${PWD}:/xk6" --platform linux/amd64 -e  GOOS=darwin -e GOARCH=arm64 grafana/xk6 build latest --output k6-darwin-arm64-${ci_version} --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=/xk6
-	docker run --rm -t -u ${ci_user}:${ci_group} -v "${PWD}:/xk6" --platform linux/amd64 -e  GOOS=linux -e GOARCH=amd64 grafana/xk6 build latest --output k6-linux-amd64-${ci_version} --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=/xk6
-	docker run --rm -t -u ${ci_user}:${ci_group} -v "${PWD}:/xk6" --platform linux/amd64 -e  GOOS=linux -e GOARCH=arm64 grafana/xk6 build latest --output k6-linux-arm64-${ci_version} --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=/xk6
-	docker run --rm -t -u ${ci_user}:${ci_group} -v "${PWD}:/xk6" --platform linux/amd64 -e  GOOS=windows -e GOARCH=amd64 grafana/xk6 build latest --output k6-windows-amd64-${ci_version} --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=/xk6
-	docker run --rm -t -u ${ci_user}:${ci_group} -v "${PWD}:/xk6" --platform linux/amd64 -e  GOOS=windows -e GOARCH=arm64 grafana/xk6 build latest --output k6-windows-arm64-${ci_version} --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=/xk6
+	GOOS=darwin GOARCH=amd64 xk6 build latest --output k6-darwin-amd64-${ci_version} --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=.
+	GOOS=darwin GOARCH=arm64 xk6 build latest --output k6-darwin-arm64-${ci_version} --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=.
+	GOOS=linux GOARCH=amd64 xk6 build latest --output k6-linux-amd64-${ci_version} --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=.
+	GOOS=linux GOARCH=arm64 xk6 build latest --output k6-linux-arm64-${ci_version} --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=.
+	GOOS=windows GOARCH=amd64 xk6 build latest --output k6-windows-amd64-${ci_version} --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=.
+	GOOS=windows GOARCH=arm64 xk6 build latest --output k6-windows-arm64-${ci_version} --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=.
 
 
 .PHONY: test build-ci clean format all example
