@@ -1,4 +1,4 @@
-module github.com/grafana/xk6-sql-driver-ramsql
+module github.com/yogendra/xk6-sql-driver-yugabytedb
 
 go 1.22
 
