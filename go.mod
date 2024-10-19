@@ -2,7 +2,7 @@ module github.com/yogendra/xk6-sql-driver-yugabytedb
 
 go 1.22
 
-toolchain go1.23.2
+toolchain go1.22.8
 
 require (
 	github.com/grafana/xk6-sql v0.5.0-alpha.3
