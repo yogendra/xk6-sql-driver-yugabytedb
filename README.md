@@ -38,3 +38,35 @@ export default function () {
 ## Usage
 
 Check the [xk6-sql documentation](https://github.com/grafana/xk6-sql) on how to use this database driver.
+
+
+
+## Build from source
+
+Using docker
+
+
+```
+
+# Linux ARM
+export os=linux arch=arm64 version=$(git tag --points-at HEAD); docker run --rm -it -u "$(id -u):$(id -g)" -v "${PWD}:/xk6" --platform linux/amd64 -e  GOOS=$os -e GOARCH=$arch grafana/xk6 build latest --output k6-$os-$arch-$version --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=/xk6
+
+# Linux x86
+export os=linux arch=amd64 version=$(git tag --points-at HEAD); docker run --rm -it -u "$(id -u):$(id -g)" -v "${PWD}:/xk6" --platform linux/amd64 -e  GOOS=$os -e GOARCH=$arch grafana/xk6 build latest --output k6-$os-$arch-$version --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=/xk6
+
+
+# MacOS ARM
+export os=darwin arch=arm64 version=$(git tag --points-at HEAD); docker run --rm -it -u "$(id -u):$(id -g)" -v "${PWD}:/xk6" --platform linux/amd64 -e  GOOS=$os -e GOARCH=$arch grafana/xk6 build latest --output k6-$os-$arch-$version --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=/xk6
+
+
+# MacOS x86
+export os=darwin arch=amd64 version=$(git tag --points-at HEAD); docker run --rm -it -u "$(id -u):$(id -g)" -v "${PWD}:/xk6" --platform linux/amd64 -e  GOOS=$os -e GOARCH=$arch grafana/xk6 build latest --output k6-$os-$arch-$version --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=/xk6
+
+# Windows ARM Binary
+export os=windows arch=arm64 version=$(git tag --points-at HEAD); docker run --rm -it -u "$(id -u):$(id -g)" -v "${PWD}:/xk6" --platform linux/amd64 -e  GOOS=$os -e GOARCH=$arch grafana/xk6 build latest --output k6-$os-$arch-$version --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=/xk6
+
+# Windows x86 Binary
+export os=windows arch=amd64 version=$(git tag --points-at HEAD);  docker run --rm -it -u "$(id -u):$(id -g)" -v "${PWD}:/xk6" --platform linux/amd64 -e  GOOS=$os -e GOARCH=$arch grafana/xk6 build latest --output k6-$os-$arch-$version./ --with github.com/grafana/xk6-sql@latest --with github.com/yogendra/xk6-sql-driver-yugabytedb@latest=/xk6
+
+
+```
