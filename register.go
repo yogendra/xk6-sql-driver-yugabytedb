@@ -5,9 +5,9 @@ import (
 	"github.com/grafana/xk6-sql/sql"
 
 	// Blank import required for initialization of driver.
-	_ "github.com/proullon/ramsql/driver"
+	_ "github.com/yugabyte/pgx/v5"
 )
 
 func init() {
-	sql.RegisterModule("ramsql")
+	sql.RegisterModule("yugabytedb")
 }
